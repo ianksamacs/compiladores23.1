@@ -1,16 +1,30 @@
-# This is a sample Python script.
+#author: Ianc Samac, Luis Eduardo
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import os
+import glob
 
+def get_arquivos(caminho_pasta):
+    return glob.glob(os.path.join(caminho_pasta, '*.txt'))
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {Samac}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Lê cada arquivo e adiciona seu conteúdo a uma lista
+    conteudos_arquivos = []
+def export(file, result):
+    file = file.replace('.txt', '-saida.txt')
+    with open(file, 'w') as f:
+        f.write(result)
 
-#olá xD Valeu
-# Press the green button in the gutter to run the script.
+def analisar(file):
+    conteudo_arquivo = ""
+    with open(file, 'r') as f:
+        conteudo_arquivo = f.read()
+    if conteudo_arquivo == "":
+        return export(file, "")
+    else:
+        return export(file, conteudo_arquivo)
+
+def main():
+    for x in get_arquivos("files/"):
+        analisar(x)
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
